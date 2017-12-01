@@ -1,0 +1,30 @@
+{
+  "name": "alumni-app-ec2-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "restart": "pm2 startOrRestart ecosystem.config.js",
+    "deploy": "pm2 deploy ecosystem.config.js production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ainc/alumni-app-ec2-server.git"
+  },
+  "author": "Nick Sladic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ainc/alumni-app-ec2-server/issues"
+  },
+  "homepage": "https://github.com/ainc/alumni-app-ec2-server#readme",
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "request": "^2.83.0"
+  },
+  "dependencies": {
+    "@google/maps": "^0.4.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.15.4"
+  }
+}
