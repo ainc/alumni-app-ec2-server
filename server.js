@@ -17,7 +17,7 @@ function autoUpdate(){
   console.log("checked");
   var request = require('request');
   setInterval(function(){
-    request('https://script.googleusercontent.com/macros/echo?user_content_key=K1E85EiRkGvkNnkwdiT6jmlX9xSU6hUvetLTNzpCcd_jSC2GpNbwZfr0KcbLfJdiHrUouVDeG7bCkVA0V_Fi5YMBTitaxVEdOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKp1q6LyBxbset-sbB7gU77AXzTewdOjiNZcuPDH50tUN-GOHXQiXJz0ANQ8AP0ES9ozQJv8DXWa1hoIgY-huuTFg&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx', function (error, response, body) {
+    request('https://script.googleusercontent.com/macros/echo?user_content_key=mOuED-W9TuQoE1bFzetzUmLBZksfwChhZWoMHqafVn05uUrIQ8riWv0FxR8bpjWnCDdRFeXBVdxw-A2y7Py72SsKy0SSeeooOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKpyL-ijJ-ZEyPjb-IzDCQSDSKG7_zsK1EKAvX-WKjzxZzzWANPnCMp7MZS2N5kd6RbVmMFv4gF1-vE-iev1o-8vDIEB_jcADA_w&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         updateData(body);
       }
@@ -31,7 +31,7 @@ function autoUpdate(){
 */
 
 function updateData(data){
-
+  console.log(data);
   //obtain json file
   setIntervalAPI(data, 1000);
 
@@ -49,8 +49,8 @@ function getGeoloc(location, data, pos){
     if (!err) {
       var temp = (response.json.results[0].geometry.location);
       console.log(temp);
-      data.Form1[pos].lat = temp.lat;
-      data.Form1[pos].lng = temp.lng;
+      data.TAResponses[pos].lat = temp.lat;
+      data.TAResponses[pos].lng = temp.lng;
     }
 
   });
@@ -64,9 +64,9 @@ new Alumni Content
 function setIntervalAPI(data, delay){
   var count = 0;
   data = JSON.parse(data);
-  console.log(data.Form1.length);
+  console.log(data.TAResponses.length);
   var interval = setInterval( () => {
-    if(count === data.Form1.length){
+    if(count === data.TAResponses.length){
       clearInterval(interval)
       console.log("Completed");
       data = JSON.stringify(data);
@@ -75,7 +75,7 @@ function setIntervalAPI(data, delay){
       })
     }
     else{
-      getGeoloc(data.Form1[count].location, data, count);
+      getGeoloc(data.TAResponses[count].Current_Location, data, count);
       count++;
     }
   }, delay);
