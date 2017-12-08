@@ -119,6 +119,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use('/', express.static('./public'))
+
 //allows requesting of ./data/alumni.json file
 app.get('/api/getAlumni', (req,res, next) => {
   readJSONFile('./data/alumni.json', function (err, json) {
